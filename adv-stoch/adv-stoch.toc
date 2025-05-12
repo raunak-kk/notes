@@ -1,0 +1,5 @@
+\contentsline {chapter}{\numberline {1}Preliminaries}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Generating Functions}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Generating Functions of Common Distributions}{2}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Differentiation of Generating Functions}{2}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {3.0.1}Summing a random number of rvs}{3}{subsection.3.0.1}%

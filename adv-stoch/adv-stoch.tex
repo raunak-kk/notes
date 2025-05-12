@@ -1,0 +1,146 @@
+\documentclass[a4paper]{report}
+\usepackage[utf8x]{inputenc}
+% For indicator
+\usepackage{dsfont}  
+\usepackage{amsmath, amsfonts, amsthm, amssymb, graphicx, geometry}
+\usepackage{algorithm, algpseudocode}
+
+\usepackage{color}   
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, 
+    linktoc=all,     
+    linkcolor=blue,  
+    }
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% Color box theorem
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\newtcbtheorem{theo}
+  {Theorem}{}{theorem}
+
+\setlength{\parindent}{0pt} % Default indent setting stuff to prevent over full hbox and using no indents
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+\def\ntitle {Advanced Stochastic Processes}
+\author{Sidney I. Resnick}
+\title{\ntitle}
+\date{}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[chapter]{Lemma}
+\newtheorem{proposition}[chapter]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\chapter{Preliminaries}
+
+\section{Generating Functions}
+\begin{definition}[Generating Function]
+\label{Generating Function}
+The generating function of a \textit{non-negative integer valued} rv $X$ is \[ \mathbb{P}(s) = \sum_{k=0}^{\infty}p_{k}s^{k} \] or is equivalently
+\[
+P(s) = \mathbb{E}s^{X}
+\]
+\end{definition}
+
+\begin{remark} 
+Generating functions are useful for computing mass functions of sums of independant rvs, calculating moments, limits of distributions, and more.
+\end{remark}
+
+\subsection{Generating Functions of Common Distributions}
+Just factor the $s^{k}$ out.
+
+\textbf{Poisson:} $X \sim p(k; \lambda) $
+\[
+  P(s) = \sum_{k=0}^{\infty} e^{-\lambda} \frac{(\lambda)^{k}}{k!} s^{k} = e^{\lambda(s-1)}
+\]
+
+\textbf{Binomial:} $X \sim b(k; n, p) $
+\[
+P(s) = (q + ps)^{n}
+\]
+
+\textbf{Geometric:} $X \sim g(k; p)$
+\[
+P(s) = \frac{p}{1 - qs}
+\]
+
+\subsection{Differentiation of Generating Functions}
+\[
+\frac{d^{ n }}{ds^{ n }} \mathbb{P}(s) = \sum_{k=n}^{\infty} \frac{k!}{(k-n)!} p_{k} s^{k-n}
+\]
+
+Thus, evaluating at $s=0$:
+\[
+\left. \frac{d^{ n }}{ds^{ n }} \mathbb{P}(s) \right|_{s=0}= n!p_{n}
+\]
+\begin{proposition}
+A generating function uniquely dtermines its sequence
+\end{proposition}
+
+Note that differentiating moments and evaluating at $s=1$ gives you information about various moments i.e.
+\begin{equation}
+  \lim_{ s \uparrow 1 } \frac{d^{ n }}{ds^{ n }} \mathbb{P}(s) = \mathbb{E}[X(X-1)...(X-2)(X-n+1)]
+\end{equation}
+
+\begin{proposition}
+The gf of a convolution is the product of the gf's (true for any 2 sequences)
+\[
+P_{X_{1} + X_{2}}(s) = P_{X_{1}}(s) P_{X_{2}}(s)
+\]
+
+\end{proposition}
+
+\begin{proof}
+  \[
+P_{X_{1} + X_{2}}(s) = \mathbb{E}s^{X_{1}}\mathbb{E}s^{X_{2}}
+\]
+\end{proof}
+
+\begin{example}
+A binomial $X \sim b(k; n, p)$ can be decomposed as a sum of Bernoullis $X_{i} \sim \mathcal{B} (k; p)$ as $X = X_{1} + X_{2} + ... + X_{n}$ thus,
+\[
+P_{X_{1}} = (q + ps)
+\]
+and \[
+P_{X} (s) = (q + ps)^{n} 
+\]
+
+\end{example}
+
+\begin{example}
+A sum of Poissons is a poisson. $X_{1} \sim p(k;\lambda), X_{2} \sim p(k; \mu)$ and with $X \sim p(k; \lambda + \mu)$ we have,
+\[
+P_{X_{1} + X_{2}} (s) = e^{\lambda(s-1)} e^{\mu(s-1)} = P_{X} (s)
+\]
+
+\end{example}
+
+\subsection{Summing a random number of rvs}
+Let $N$ be a random variable and let $S_{N} = X_{1} + X_{2} + ... + X_{N}$. The following result comes from expanding the formula and swithcing the order of summation.
+\begin{equation}
+P_{S_{N}} = P_{N}(P_{X}(s))
+\end{equation}
+
+
+\end{document}
