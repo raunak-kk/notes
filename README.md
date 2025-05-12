@@ -1,2 +1,2 @@
 # notes
-General purpose notes typeset on latex.
+General purpose notes typeset in Latex.
